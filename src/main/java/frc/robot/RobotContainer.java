@@ -14,10 +14,15 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.commands.ExtendESolenoids;
+import frc.commands.ExtendPSolenoid;
+import frc.commands.RetractESolenoids;
+import frc.commands.RetractPSolenoid;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Solenoids;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.MecanumControllerCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -32,10 +37,20 @@ import java.util.List;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+    private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+    private final Solenoids s_solenoids = new Solenoids();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+
+    private final JoystickButton extendESolenoidsButton = new JoystickButton(m_driverController,Constants.Logitech_F310_Controller.Right_Bumper);
+    private final JoystickButton extendPSolenoidButton = new JoystickButton(m_driverController,Constants.Logitech_F310_Controller.Left_Bumper);
+
+    //Commands
+    private final ExtendESolenoids extendESolenoidsCommand = new ExtendESolenoids(s_solenoids);
+    private final RetractESolenoids retractESolenoidsCommand = new RetractESolenoids(s_solenoids);
+    private final ExtendPSolenoid extendPSolenoidCommand = new ExtendPSolenoid(s_solenoids);
+    private final RetractPSolenoid retractPSolenoidCommand = new RetractPSolenoid(s_solenoids);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -65,9 +80,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Drive at half speed when the right bumper is held
-    new JoystickButton(m_driverController, Button.kRightBumper.value)
-        .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
-        .whenReleased(() -> m_robotDrive.setMaxOutput(1));
+    // new JoystickButton(m_driverController, Button.kRightBumper.value)
+    //     .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
+    //     .whenReleased(() -> m_robotDrive.setMaxOutput(1));
+    extendESolenoidsButton.whenPressed(extendESolenoidsCommand).whenReleased(retractESolenoidsCommand);
+    extendPSolenoidButton.whenPressed(extendPSolenoidCommand).whenReleased(retractPSolenoidCommand);
   }
 
   /**
