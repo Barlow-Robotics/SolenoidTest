@@ -71,13 +71,8 @@ public final class Constants {
   }
 
   public static final class SolenoidsConstants {
-    public static final int ID_eSolenoidA1 = 1;
-    public static final int ID_eSolenoidA2 = 2;
-    public static final int ID_eSolenoidB1 = 3;
-    public static final int ID_eSolenoidB2 = 4;
-    public static final int ID_pSolenoid = 5;
-
-    public static final int ID_pcm = 6;
+    public static final int ID_eSolenoid = 1;
+    public static final int ID_pcmCompressor = 2;
   }
 
   public final class Logitech_F310_Controller {
@@ -118,4 +113,11 @@ public final class Constants {
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
   }
+
+  public static final class SensorConstants {
+    public static int ID_Hall1 = 1;
+    public static int ID_Hall2 = 2;
+  
+  }
+
 }

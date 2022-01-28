@@ -7,15 +7,17 @@ package frc.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Solenoids;
 
-public class RetractPSolenoid extends CommandBase {
 
-private Solenoids p_retract;
+public class ExtendESolenoid extends CommandBase {
+ 
+ private Solenoids s_extend;
 
-  /** Creates a new RetractPSolenoid. */
-  public RetractPSolenoid(Solenoids s) {
+  /** Creates a new ExtendSolenoids. */
+
+  public ExtendESolenoid(Solenoids s) {
     // Use addRequirements() here to declare subsystem dependencies.
-    p_retract = s;
-    addRequirements(p_retract);
+      s_extend = s;
+      addRequirements(s_extend);
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +27,7 @@ private Solenoids p_retract;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    p_retract.retractPSolenoid();
+    s_extend.extendESolenoid();
   }
 
   // Called once the command ends or is interrupted.

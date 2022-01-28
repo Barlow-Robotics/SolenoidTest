@@ -14,10 +14,8 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.commands.ExtendESolenoids;
-import frc.commands.ExtendPSolenoid;
-import frc.commands.RetractESolenoids;
-import frc.commands.RetractPSolenoid;
+import frc.commands.ExtendESolenoid;
+import frc.commands.RetractESolenoid;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
@@ -43,14 +41,11 @@ public class RobotContainer {
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
-    private final JoystickButton extendESolenoidsButton = new JoystickButton(m_driverController,Constants.Logitech_F310_Controller.Right_Bumper);
-    private final JoystickButton extendPSolenoidButton = new JoystickButton(m_driverController,Constants.Logitech_F310_Controller.Left_Bumper);
+    private final JoystickButton extendESolenoidButton = new JoystickButton(m_driverController,Constants.Logitech_F310_Controller.Right_Bumper);
 
     //Commands
-    private final ExtendESolenoids extendESolenoidsCommand = new ExtendESolenoids(s_solenoids);
-    private final RetractESolenoids retractESolenoidsCommand = new RetractESolenoids(s_solenoids);
-    private final ExtendPSolenoid extendPSolenoidCommand = new ExtendPSolenoid(s_solenoids);
-    private final RetractPSolenoid retractPSolenoidCommand = new RetractPSolenoid(s_solenoids);
+    private final ExtendESolenoid extendESolenoidCommand = new ExtendESolenoid(s_solenoids);
+    private final RetractESolenoid retractESolenoidCommand = new RetractESolenoid(s_solenoids);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -83,8 +78,7 @@ public class RobotContainer {
     // new JoystickButton(m_driverController, Button.kRightBumper.value)
     //     .whenPressed(() -> m_robotDrive.setMaxOutput(0.5))
     //     .whenReleased(() -> m_robotDrive.setMaxOutput(1));
-    extendESolenoidsButton.whenPressed(extendESolenoidsCommand).whenReleased(retractESolenoidsCommand);
-    extendPSolenoidButton.whenPressed(extendPSolenoidCommand).whenReleased(retractPSolenoidCommand);
+    extendESolenoidButton.whenPressed(extendESolenoidCommand).whenReleased(retractESolenoidCommand);
   }
 
   /**
