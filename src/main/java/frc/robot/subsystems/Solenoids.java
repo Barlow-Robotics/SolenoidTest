@@ -18,7 +18,8 @@ public class Solenoids extends SubsystemBase {
   public Compressor pcmCompressor;
   DigitalInput Hall1 = new DigitalInput(Constants.SensorConstants.ID_Hall1);
   DigitalInput Hall2 = new DigitalInput(Constants.SensorConstants.ID_Hall2);
-  boolean lastState;
+  boolean lastState1;
+  boolean lastState2;
 
   /** Creates a new ElectricSolenoids. */
   public Solenoids() {
@@ -30,10 +31,10 @@ public class Solenoids extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if (Hall1.get() != lastState){
+    if (Hall1.get() != lastState1){
       System.out.println(Hall1);
     }
-    if (Hall2.get() != lastState){
+    if (Hall2.get() != lastState2){
       System.out.println(Hall2);
     }
   }
